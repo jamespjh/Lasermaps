@@ -36,9 +36,20 @@ class Lasermap(object):
          sensor="false",
          maptype='roadmap',
          key=self.config['key']))
-        return "http://maps.googleapis.com/maps/api/staticmap?%s"%request
+        # Need multiple "style" arguments, so can't do via a dict
+        styles=[
+        "feature:all|element:labels|visibility:off",
+        "feature:transit|visibility:off",
+        "feature:landscape|visibility:off",
+        "feature:poi|visibility:off",
+        "feature:water|visibility:off",
+        "feature:administrative|visibility:off"
+        ]
+        args="&".join([request]+["style=%s"%style for style in styles])
+        return "http://maps.googleapis.com/maps/api/staticmap?%s"%args
         
     def getimage(self):
+        print "Fetching ",self.requesturl()
         return urllib2.urlopen(self.requesturl())
 
     def writeresult(self):
