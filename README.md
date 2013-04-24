@@ -1,0 +1,1 @@
+Note that so far this doesn't work and just downloads a static map, without any image processing
