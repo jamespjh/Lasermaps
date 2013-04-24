@@ -1,0 +1,2 @@
+import lasermaps
+lasermaps.main()
